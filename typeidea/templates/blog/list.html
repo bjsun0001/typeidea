@@ -1,0 +1,9 @@
+<h1>list</h1>
+<ul>
+{% for post in posts %}
+    <p class="list-group-item-text">文章标题:<a href="{% url 'post_detail' post.id  %}">{{ post.title }}</a></p>
+    <p class="list-group-item-text">文章描述:{{ post.desc }}</p>
+    <hr/>
+{% endfor %}
+</ul>
+{% include "paginator.html" %}
