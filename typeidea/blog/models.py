@@ -47,8 +47,8 @@ class Post(models.Model):
 
     title = models.CharField(max_length=255, verbose_name="标题")
     desc = models.CharField(max_length=1024, blank=True, verbose_name="摘要")
-    category = models.ForeignKey(Category, verbose_name="分类")
-    tag = models.ManyToManyField(Tag, verbose_name="标签")
+    category = models.ForeignKey(Category, related_name="post_category",verbose_name="分类")
+    tag = models.ManyToManyField(Tag,related_name="posts", verbose_name="标签")
 
     content = models.TextField(verbose_name="正文", help_text="正文必须为MarkDown格式")
     status = models.PositiveIntegerField(default=1, choices=STATUS_ITEMS, verbose_name="状态")
@@ -56,5 +56,6 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
 
     class Meta:
+        ordering = ("-created_time","title",)
         verbose_name = verbose_name_plural = "文章"
 
